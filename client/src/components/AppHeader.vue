@@ -3,6 +3,7 @@
     <router-link to="/">KSTDS</router-link>
     <div class="header-right">
       <router-link to="/">Home</router-link>
+      <router-link to="/">Login</router-link>
       <router-link to="/">About</router-link>
     </div>
   </div>
@@ -26,7 +27,7 @@
   /* Style the header links */
   .header a {
     float: left;
-    color: #b4c7d0;
+    color: #fff;
     text-align: center;
     padding: 12px;
     text-decoration: none;
@@ -45,6 +46,8 @@
   .header a:hover {
     background-color: #b4c7d0;
     color: black;
+    transition: all 0.2s ease-in-out;
+    transform: scale(1.05);
   }
 
   /* Style the active/current link*/
