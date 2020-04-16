@@ -6,6 +6,8 @@
 
 <script>
 
+// our main entry point 
+
 export default {
 	name: 'App'
 }
