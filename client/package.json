@@ -1,5 +1,6 @@
 {
-  "name": "client",
+  "name": "kstds",
+  "description": "client-side for kstds project",
   "version": "0.1.0",
   "private": true,
   "scripts": {
