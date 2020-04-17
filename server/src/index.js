@@ -20,7 +20,14 @@
 	// use cors and bodyparser
 	app.options('*', cors())
 	app.use(bodyParser.json())
-
+	// set headers for all
+	app.use((req, res, next) => {
+		res.set({
+			"Access-Control-Allow-Origin" : "*", 
+			"Access-Control-Allow-Credentials" : true 
+		})
+		next()
+	})
 
 	// to establish mysql connection:
 	/*
