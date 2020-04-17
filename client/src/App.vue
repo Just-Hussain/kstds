@@ -37,10 +37,10 @@
 		margin: auto;
 		max-width: 960px;
 	}
-	.cards {
+	/* .cards {
 		padding: 15px;
 		display: flex;
 		flex-flow: row wrap;
 		justify-content: space-evenly;
-	}
+	} */
 </style>
