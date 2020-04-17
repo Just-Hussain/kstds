@@ -78,9 +78,10 @@ export default {
   
   .outer {
     border-style: solid;
-    border-radius: 15px;
     /* border-width: 1px; */
     border-color: #1d2935;
+    border-right: none;
+    border-left: none;
   }
 
   .matches {
