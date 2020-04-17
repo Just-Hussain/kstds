@@ -50,9 +50,9 @@
 </template>
 
 <script>
-
   import BaseCard from './../components/BaseCard'
   import BaseTable from './../components/BaseTable'
+  
   export default {
     name: 'Home',
     components: {

@@ -6,7 +6,7 @@
       <router-link to="/">Highlights</router-link>
       <router-link to="/">Teams</router-link>
       <router-link to="/">Fields</router-link>
-      <router-link to="/">Login</router-link>
+      <router-link to="/login">Login</router-link>
     </div>
   </div>
 </template>
