@@ -2,9 +2,11 @@
   <div class="header">
     <router-link to="/">KSTDS</router-link>
     <div class="header-right">
-      <router-link to="/">Home</router-link>
+      <router-link to="/">Tournaments</router-link>
+      <router-link to="/">Highlights</router-link>
+      <router-link to="/">Teams</router-link>
+      <router-link to="/">Fields</router-link>
       <router-link to="/">Login</router-link>
-      <router-link to="/">About</router-link>
     </div>
   </div>
 </template>
@@ -62,7 +64,7 @@
   }
 
   /* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */
-  @media screen and (max-width: 500px) {
+  @media screen and (max-width: 600px) {
     .header a {
       float: none;
       display: block;
