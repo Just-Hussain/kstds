@@ -6,9 +6,11 @@
           
           <div class="match-header">
             <h2>
-              <span class="team one"> Team 1 </span>
-              <span class="score"> 0 - 0 </span>
-              <span class="team two"> Team 2 </span>
+              <span class="team one"> {{match.team1}} </span>
+              <span class="score"> 
+                {{match.score1}} - {{match.score2}} 
+              </span>
+              <span class="team two"> {{match.team2}} </span>
             </h2>
           </div>
 
@@ -19,11 +21,11 @@
 
           <div class="inner middle">
             <h3>Field</h3>
-            <p>Field XYZ</p>
+            <p>{{match.field}}</p>
             <h3>Date</h3>
-            <p>01-01-2020</p>
+            <p>{{match.date}}</p>
             <h3>Time</h3>
-            <p>18:30</p>
+            <p>{{match.time}}</p>
           </div>
 
           <div class="inner right">
@@ -104,6 +106,7 @@
       BaseModal
     },
 
+    props: ['match'],
     data() {
       return {
         modal_field: false,
