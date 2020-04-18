@@ -5,7 +5,6 @@
       <router-link to="/">Tournaments</router-link>
       <router-link to="/">Highlights</router-link>
       <router-link to="/teams">Teams</router-link>
-      <router-link to="/">Fields</router-link>
       <router-link to="/login">Login</router-link>
     </div>
   </div>
