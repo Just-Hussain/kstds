@@ -83,14 +83,14 @@
             rank: 0
           },
           {
-            name: 'Team XXX',
+            name: 'Team YYY',
             scored: 0,
             recieved: 0,
             points: 0,
             rank: 0
           },
           {
-            name: 'Team XXX',
+            name: 'Team ZZZ',
             scored: 0,
             recieved: 0,
             points: 0,

@@ -26,6 +26,8 @@
             <p>{{match.date}}</p>
             <h3>Time</h3>
             <p>{{match.time}}</p>
+            <h3>Referee</h3>
+            <p>{{match.referee}}</p>
           </div>
 
           <div class="inner right">

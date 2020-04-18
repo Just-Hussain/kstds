@@ -3,6 +3,7 @@
     <h1>Matches</h1>
     
     <button @click="modal_match = true">Add Match</button>
+    <button @click="modal_referee = true">List by Referee</button>
 
     <BaseModal
       v-if="modal_match"
@@ -15,6 +16,19 @@
         <!-- input fields for adding new match -->
       </div>
     </BaseModal>
+
+    <BaseModal
+      v-if="modal_referee"
+      action="by-referee"
+      @close="modal_referee = false"
+      @by-referee="listByReferee"
+    >
+      <h3 slot="header">Matches by Referee</h3>
+      <div slot="body">
+        <input type="text" placeholder="referee...">        
+      </div>
+    </BaseModal>
+
 
     <BaseMatch
       :match="match"
@@ -44,6 +58,7 @@
       // and from the database using a match service or such
       return {
         modal_match: false,
+        modal_referee: false,
         matches: [
           {
             id: 0,
@@ -53,7 +68,8 @@
             team2: 'Team 2',
             field: 'Field XYZ',
             score1: 0,
-            score2: 1
+            score2: 1,
+            referee: 'Referee XYZ'
 
           },
           {
@@ -64,7 +80,8 @@
             team2: 'Team 2',
             field: 'Field XVYZ',
             score1: 0,
-            score2: 1
+            score2: 1,
+            referee: 'Referee XYZ'
           },
           {
             id: 2,
@@ -74,7 +91,8 @@
             team2: 'Team 2',
             field: 'Field XYZQ',
             score1: 0,
-            score2: 1
+            score2: 1,
+            referee: 'Referee XYZ'
           }
         ]
       }
@@ -84,6 +102,17 @@
       addMatch() {
         console.log(`from add match`);
         this.modal_match = false
+      },
+
+      listByReferee() {
+        // filter the matches array
+        // based on the given referee.
+        // insted of using matches array
+        // in the Base Match v-for
+        // a computed array can be used
+        
+        console.log(`from by referee`);
+        this.modal_referee = false
       }
     }
   }
