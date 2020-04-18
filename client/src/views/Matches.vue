@@ -1,6 +1,21 @@
 <template>
   <main>
     <h1>Matches</h1>
+    
+    <button @click="modal_match = true">Add Match</button>
+
+    <BaseModal
+      v-if="modal_match"
+      action="add-match"
+      @close="modal_match = false"
+      @add-match="addMatch"
+    >
+      <h3 slot="header">Add a New Match</h3>
+      <div slot="body">
+        <!-- input fields for adding new match -->
+      </div>
+    </BaseModal>
+
     <BaseMatch
       :match="match"
       v-for="match in matches"
@@ -13,11 +28,13 @@
 
 <script>
   import BaseMatch from './../components/BaseMatch'
+  import BaseModal from './../components/BaseModal'
 
   export default {
     name: 'Matches',
     components: {
-      BaseMatch
+      BaseMatch,
+      BaseModal
     },
 
     data() {
@@ -26,6 +43,7 @@
       // later on, populating the array should be on mounted
       // and from the database using a match service or such
       return {
+        modal_match: false,
         matches: [
           {
             id: 0,
@@ -59,6 +77,13 @@
             score2: 1
           }
         ]
+      }
+    },
+
+    methods: {
+      addMatch() {
+        console.log(`from add match`);
+        this.modal_match = false
       }
     }
   }
