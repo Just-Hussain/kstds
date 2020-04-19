@@ -3,6 +3,7 @@
     <h2>Current Tournament ({{ tour_id }})</h2>
     <div class="outer">
       <h1>{{ tour_name }}</h1>
+      
       <BaseTable>
         <tr>
           <th>Match No.</th>
@@ -45,6 +46,12 @@
         </tr>
 
       </BaseTable>
+
+      <div class="btn">
+        <router-link to="/matches">
+          Show Detailed
+        </router-link>
+      </div>
     </div>
   </main>
 </template>
@@ -83,5 +90,27 @@
     border-right: none;
     border-left: none;
   }
+  
+  a {
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    font-size: 18px;
+    line-height: 25px;
+  }
 
+  .btn {
+    width: 200px;
+    margin: auto;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    border: 1px solid #42b983;
+    background: #42b983;
+    border-radius: 20px;
+  }
+
+  .btn:hover {
+    transform: scale(1.08);
+    transition: all 0.2s ease-in-out;
+  }
 </style>
