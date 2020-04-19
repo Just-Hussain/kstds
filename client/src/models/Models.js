@@ -2,23 +2,21 @@
 // a lot of info is still missing
 // it probaly needs some work
 
-
 export class Tournament {
   constructor(
-    id, name, startDate, endDate, matches, teams
+    id, name, startDate, endDate, matches
     ) {
     this.id = id
     this.name = name
     this.startDate = startDate
     this.endDate = endDate
     this.matches = matches
-    this.teams = teams
-  }
+    }
 }
 
 export class Match {
   constructor(
-    id, date, time, team1, team2, field, referee, goals
+    id, date, time, team1, team2, field, referee, goals, score1=0, score2=0
   ) {
       this.id = id
       this.date = date
@@ -28,16 +26,22 @@ export class Match {
       this.field = field
       this.referee = referee
       this.goals = goals
+      this.score1 = score1
+      this.score2 = score2
     }
 }
 
 export class Team {
   constructor(
-    id, name, players
+    id, name, players=[], scored, recieved, points, rank
   ) {
     this.id = id
     this.name = name
     this.player = players
+    this.scored = scored
+    this.recieved = recieved
+    this.points = points
+    this.rank = rank
   }
 }
 
@@ -63,6 +67,7 @@ export class Goal {
   }
 }
 
+// probably these classes won`t be really useful
 export class Field {
   constructor(
     id, name
@@ -76,7 +81,9 @@ export class Referee {
   constructor(
     id, first_name, last_name
   ) {
-
+    this.id = id
+    this.first_name = first_name
+    this.last_name = last_name
   }
 }
 

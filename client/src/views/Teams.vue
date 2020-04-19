@@ -35,7 +35,7 @@
     <div class="cards">
       <BaseCard
         v-for="team in teams"
-        :key="team.name"
+        :key="team.id"
       >
         <h1>{{ team.name }}</h1>
         <BaseTable>
@@ -62,6 +62,8 @@
   import BaseCard from './../components/BaseCard'
   import BaseTable from './../components/BaseTable'
   import BaseModal from './../components/BaseModal'
+  import {Team} from './../models/Models'
+
 
   export default {
     name: 'Teams',
@@ -75,27 +77,9 @@
       return {
         modal_get: false,
         teams: [
-          {
-            name: 'Team XXX',
-            scored: 0,
-            recieved: 0,
-            points: 0,
-            rank: 0
-          },
-          {
-            name: 'Team YYY',
-            scored: 0,
-            recieved: 0,
-            points: 0,
-            rank: 0
-          },
-          {
-            name: 'Team ZZZ',
-            scored: 0,
-            recieved: 0,
-            points: 0,
-            rank: 0
-          }
+          new Team(0, 'Team XXX', [], 0, 0, 0, 0),
+          new Team(1, 'Team YYY', [], 0, 0, 0, 0),
+          new Team(2, 'Team ZZZ', [], 0, 0, 0, 0)
         ]
       }
     },

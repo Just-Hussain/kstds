@@ -15,35 +15,19 @@
           <th>Referee</th>
         </tr>
 
-        <tr>
-          <td>1</td>
-          <td>01-01-2020</td>
-          <td>16:30</td>
-          <td>Team X</td>
-          <td>Team Y</td>
-          <td>Field X</td>
-          <td>Field X</td>
+        <tr 
+          v-for="match in tour.matches"
+          :key="match.id"
+        >
+          <td>{{match.id}}</td>
+          <td>{{match.date}}</td>
+          <td>{{match.time}}</td>
+          <td>{{match.team1}}</td>
+          <td>{{match.team2}}</td>
+          <td>{{match.field}}</td>
+          <td>{{match.referee}}</td>
         </tr>
         
-        <tr>
-          <td>1</td>
-          <td>01-01-2020</td>
-          <td>16:30</td>
-          <td>Team X</td>
-          <td>Team Y</td>
-          <td>Field X</td>
-          <td>Field X</td>
-        </tr>
-
-        <tr>
-          <td>1</td>
-          <td>01-01-2020</td>
-          <td>16:30</td>
-          <td>Team X</td>
-          <td>Team Y</td>
-          <td>Field X</td>
-          <td>Field X</td>
-        </tr>
 
       </BaseTable>
 
@@ -59,7 +43,9 @@
 <script>
   import BaseCard from './../components/BaseCard'
   import BaseTable from './../components/BaseTable'
-  
+  import {Tournament, Match} from './../models/Models'
+
+
   export default {
     name: 'Home',
     components: {
@@ -70,10 +56,26 @@
     data() {
       return {
         tour_id: 1,
-        tour_name: 'Test Tournament'
+        tour_name: 'Test Tournament',
+        tour: new Tournament(
+          0, 'THE tournament', '', '', [
+            new Match(
+              0, '01-01-2020', '16:30',
+              'Team X', 'Team Y', 'Field X', 'Referee X'
+            ),
+            new Match(
+              1, '01-01-2020', '16:30',
+              'Team X', 'Team Y', 'Field X', 'Referee X'
+            ),
+            new Match(
+              2, '01-01-2020', '16:30',
+              'Team X', 'Team Y', 'Field X', 'Referee X'
+            )
+          ]
+        )
       }
     }
-}
+  }
 </script>
 
 <style scoped>
