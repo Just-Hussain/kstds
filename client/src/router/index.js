@@ -5,6 +5,7 @@ import Home from './../views/Home.vue'
 import Login from './../views/Login.vue'
 import Matches from './../views/Matches.vue'
 import Teams from './../views/Teams.vue'
+import Highlight from './../views/Highlight.vue'
 
 Vue.use(VueRouter)
 
@@ -37,6 +38,11 @@ export default new VueRouter({
       path: '/teams',
       name: 'Teams',
       component: Teams
+    },
+    {
+      path: '/highlight',
+      name: 'Highlight',
+      component: Highlight
     }
   ]
 })
