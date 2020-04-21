@@ -43,6 +43,7 @@
 <script>
   import BaseMatch from './../components/BaseMatch'
   import BaseModal from './../components/BaseModal'
+  import Home from './Home.vue'
 
   export default {
     name: 'Matches',
@@ -59,42 +60,7 @@
       return {
         modal_match: false,
         modal_referee: false,
-        matches: [
-          {
-            id: 0,
-            date: '01-01-2020',
-            time: '18:30',
-            team1: 'Team 1',
-            team2: 'Team 2',
-            field: 'Field XYZ',
-            score1: 0,
-            score2: 1,
-            referee: 'Referee XYZ'
-
-          },
-          {
-            id: 1,
-            date: '01-05-2020',
-            time: '19:30',
-            team1: 'Team 1',
-            team2: 'Team 2',
-            field: 'Field XVYZ',
-            score1: 0,
-            score2: 1,
-            referee: 'Referee XYZ'
-          },
-          {
-            id: 2,
-            date: '01-08-2020',
-            time: '18:00',
-            team1: 'Team 1',
-            team2: 'Team 2',
-            field: 'Field XYZQ',
-            score1: 0,
-            score2: 1,
-            referee: 'Referee XYZ'
-          }
-        ]
+        matches: Home.data().tour.matches
       }
     },
 
