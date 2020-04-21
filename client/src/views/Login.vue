@@ -1,10 +1,13 @@
 <template>
   <main id="Login">
-    <h1>Login Screen</h1>
+    <br>
+    <img src="./../assets/Logo.png" class="logo" >
   <body>
     <br>
+    <img src="./../assets/ID.png" class="loginimg">
     <input v-model="userName" placeholder="enter username" > 
     <br><br>
+    <img src="./../assets/Key.png" class="loginimg">
     <input v-model="passWord" placeholder="enter password"> 
     <br><br>
     <button @click="LogUserIn">
@@ -18,6 +21,10 @@
 </template>
 
 <script>
+
+
+
+
   export default {
     name: 'Login',
     data()
@@ -50,6 +57,8 @@
   {
     padding: 15px;
     border-radius: 7ch;
+    height:3ch;
+    width: 40ch;
     
   }
   button {
@@ -58,5 +67,16 @@
     padding: 15px;
     margin: 15px;
     color: #fff;
+  }
+  .loginimg {
+    border: none;
+    width: 6ch;
+    height: 6ch;
+    margin-right: 4px;
+    vertical-align: middle;
+  }
+  .logo{
+    width: 16ch;
+    height: 16ch;
   }
 </style>
