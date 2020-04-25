@@ -40,7 +40,7 @@
 			databse: ''
 		}
 	*/
-
+	let conn = {}
 	// pass express instance
 	// and mysql connection
 	routes(app, conn)
