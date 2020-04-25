@@ -44,7 +44,7 @@
   import BaseCard from './../components/BaseCard'
   import BaseTable from './../components/BaseTable'
   import {Tournament, Match} from './../models/Models'
-
+  import {api} from './../services/Api'
 
   export default {
     name: 'Home',
@@ -59,21 +59,26 @@
         tour_name: 'Test Tournament',
         tour: new Tournament(
           0, 'THE tournament', '', '', [
-            new Match(
-              0, '01-01-2020', '16:30',
-              'Team X', 'Team Y', 'Field X', 'Referee X'
-            ),
-            new Match(
-              1, '01-01-2020', '16:30',
-              'Team X', 'Team Y', 'Field X', 'Referee X'
-            ),
-            new Match(
-              2, '01-01-2020', '16:30',
-              'Team X', 'Team Y', 'Field X', 'Referee X'
-            )
+            // new Match(
+            //   0, '01-01-2020', '16:30',
+            //   'Team X', 'Team Y', 'Field X', 'Referee X'
+            // ),
+            // new Match(
+            //   1, '01-01-2020', '16:30',
+            //   'Team X', 'Team Y', 'Field X', 'Referee X'
+            // ),
+            // new Match(
+            //   2, '01-01-2020', '16:30',
+            //   'Team X', 'Team Y', 'Field X', 'Referee X'
+            // )
           ]
         )
       }
+    },
+
+    created: async function() {
+      this.tour.matches = (await api.get('/matches')).data
+      
     }
   }
 </script>
