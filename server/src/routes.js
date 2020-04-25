@@ -1,3 +1,4 @@
+
 // to handle routes, first specify GET or POST
 // params:
 //  the route
@@ -10,19 +11,20 @@
 //      res.status(code).send(str)
 module.exports = (app, conn) => {
 
-	// testing
-	app.get('/test', (req, res) => {
-		res.send('up and running')
-		console.log(`up and running from get /:
-            ${req.query.id}  +  ${req.query.name}
-        `)
-	})
-
 	app.get('/teams', (req, res) => {
 
 		// selects from db:
 		// goals scored, received, points, rank of each team
 		// res.send array of objects
+
+		// !! dummy data for testing !!
+
+		let dummy = [
+			new Team(0, 'Team XXX', [], 0, 0, 0, 0),
+			new Team(1, 'Team YYY', [], 0, 0, 0, 0),
+			new Team(2, 'Team ZZZ', [], 0, 0, 0, 0)
+		]
+		res.send(dummy)
 
 	})
 
@@ -88,4 +90,20 @@ module.exports = (app, conn) => {
 	})
 
 
+}
+
+
+
+class Team {
+  constructor(
+    id, name, players=[], scored, recieved, points, rank
+  ) {
+    this.id = id
+    this.name = name
+    this.player = players
+    this.scored = scored
+    this.recieved = recieved
+    this.points = points
+    this.rank = rank
+  }
 }

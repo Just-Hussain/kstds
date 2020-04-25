@@ -63,7 +63,7 @@
   import BaseTable from './../components/BaseTable'
   import BaseModal from './../components/BaseModal'
   import {Team} from './../models/Models'
-
+  import {api} from './../services/Api'
 
   export default {
     name: 'Teams',
@@ -77,9 +77,9 @@
       return {
         modal_get: false,
         teams: [
-          new Team(0, 'Team XXX', [], 0, 0, 0, 0),
-          new Team(1, 'Team YYY', [], 0, 0, 0, 0),
-          new Team(2, 'Team ZZZ', [], 0, 0, 0, 0)
+          // new Team(0, 'Team XXX', [], 0, 0, 0, 0),
+          // new Team(1, 'Team YYY', [], 0, 0, 0, 0),
+          // new Team(2, 'Team ZZZ', [], 0, 0, 0, 0)
         ]
       }
     },
@@ -88,6 +88,11 @@
       getPlayers() {
         console.log('from get players')
       }
+    },
+
+    created: async function() {
+      // GETs data from server
+      this.teams = (await api.get('/teams')).data
     }
   }
 </script>
