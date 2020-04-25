@@ -24,6 +24,8 @@ module.exports = (app, conn) => {
 			new Team(1, 'Team YYY', [], 0, 0, 0, 0),
 			new Team(2, 'Team ZZZ', [], 0, 0, 0, 0)
 		]
+
+		console.log(`sedning teams array`)
 		res.send(dummy)
 
 	})
@@ -42,10 +44,31 @@ module.exports = (app, conn) => {
 		// data, field, time, referee, teams of each match
 		// res.send array of objects
 
+		// !! dumy data for testing !!
+		let dummy = [
+			new Match(
+				0, '01-01-2020', '16:30',
+				'Team X', 'Team Y', 'Field X', 'Referee X'
+			),
+			new Match(
+				1, '01-01-2020', '16:30',
+				'Team X', 'Team Y', 'Field X', 'Referee Y'
+			),
+			new Match(
+				2, '01-01-2020', '16:30',
+				'Team X', 'Team Y', 'Field X', 'Referee X'
+			)
+		]
+
+		console.log(`sending matches array`)
+		res.send(dummy)
+
 	})
 
 	app.post('/matches', (req, res) => {
 
+		console.log(`q id: ${req.query.id}`);
+		
 		// inserts into Match table:
 		// matchID, torID, date, time, teams, field, referee
 		// data is in req.query
@@ -60,14 +83,14 @@ module.exports = (app, conn) => {
 	})
 
 
-	app.get('players', (req, res) => {
+	app.get('/players', (req, res) => {
 
 		// selects from Goals and Player:
 		// each player with more than 2 gaals
 		// res.send array of objects
 	})
 
-	app.post('players', (req, res) => {
+	app.post('/players', (req, res) => {
 		
 		// inserts into Cards table:
 		// cardID, playerID, cardType, cardDesc
@@ -84,6 +107,7 @@ module.exports = (app, conn) => {
 
 	app.get('/referees', (req, res) => {
 
+		// !! probably redundant
 		// selects matches from db:
 		// by a given referee
 		// data is in req.query
@@ -106,4 +130,21 @@ class Team {
     this.points = points
     this.rank = rank
   }
+}
+
+class Match {
+  constructor(
+    id, date, time, team1, team2, field, referee, goals, score1=0, score2=0
+  ) {
+      this.id = id
+      this.date = date
+      this.time = time
+      this.team1 = team1
+      this.team2 = team2
+      this.field = field
+      this.referee = referee
+      this.goals = goals
+      this.score1 = score1
+      this.score2 = score2
+    }
 }
