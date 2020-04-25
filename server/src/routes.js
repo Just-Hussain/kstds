@@ -9,8 +9,10 @@
 // send status code using
 //      res.status(code).send(str)
 module.exports = (app, conn) => {
-    app.get('/', (req, res) => {
+    app.get('/test', (req, res) => {
         res.send('up and running')
-        console.log('up and running from get /');
+        console.log(`up and running from get /:
+            ${req.query.id}  +  ${req.query.name}
+        `)
     })
 }
