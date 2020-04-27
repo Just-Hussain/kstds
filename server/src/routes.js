@@ -31,7 +31,9 @@ module.exports = (app, conn) => {
 	})
 
 	app.post('/teams', (req, res) => {
-		
+		// i dont`t know why i named this endpoint <teams>
+		// but i`m keeping it :\
+
 		// inserts into Goals table:
 		// matchID, torID, playerID, time
 		// data is in req.query
@@ -75,10 +77,10 @@ module.exports = (app, conn) => {
 	})
 
 
-	app.post('fields', (req, res) => {
+	app.put('/fields', (req, res) => {
 
-		// inserts into Field table:
-		// fieldID, name, status, desc
+		// update the field of the given match
+		// matchId, field ?
 		// data is in req.query
 	})
 
@@ -97,7 +99,7 @@ module.exports = (app, conn) => {
 		// data is in req.query
 	})
 
-	app.get('player', (req, res) => {
+	app.get('/player', (req, res) => {
 
 		// selects a player from db:
 		// given team and given match
@@ -108,6 +110,7 @@ module.exports = (app, conn) => {
 	app.get('/referees', (req, res) => {
 
 		// !! probably redundant
+
 		// selects matches from db:
 		// by a given referee
 		// data is in req.query
