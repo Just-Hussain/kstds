@@ -38,7 +38,7 @@
           <div class="inner right">
             <h3>By Player</h3>
             <p
-              v-for="player in match.team1.players"
+              v-for="player in match.team2.players"
               :key="player.id"
             >
               {{player.name}} = {{player.goals}}
@@ -162,12 +162,29 @@
       addGoal() {
         console.log(`from goal`)
         
-        this.scoring_team.toLowerCase() == this.match.team1.toLowerCase() ?
-          this.match.score1++ : this.match.score2++
-        
+        // here is some shitty code :\
+        // its comparing by name 
+        // so duplicate names in the same team
+        // will break it
 
-        api.post(`/teams?match=${this.match.id}&player=${this.scoring_player}&time=${this.scoring_time}`)
+        if (this.scoring_team.toLowerCase() == this.match.team1.name.toLowerCase()) {
+          this.match.score1++
+
+          this.match.team1.players.filter((player) => {
+            player.name.toLowerCase() == this.scoring_player.toLowerCase() ?
+            player.goals++ : undefined
+          })
+        }
+        else {
+          this.match.score2++
+
+          this.match.team2.players.filter((player) => {
+            player.name.toLowerCase() == this.scoring_player.toLowerCase() ?
+            player.goals++ : undefined
+          })
+        }
         
+        api.post(`/teams?match=${this.match.id}&player=${this.scoring_player}&time=${this.scoring_time}`)
         
         this.modal_goal = false
       },
