@@ -54,6 +54,7 @@
       <h3 slot="header">Change Field</h3>
       <div slot="body">
         <input 
+          v-model="new_field"
           type="text"
           placeholder="New Field Name"
         >
@@ -69,13 +70,20 @@
       <h3 slot="header">Add Goal</h3>
       <div slot="body">
         <input 
+          v-model="scoring_team"
           type="text"
-          placeholder="Scoring Team"
+          placeholder="Scoring Team..."
         >
         <input 
+          v-model="scoring_player"
           type="text"
-          placeholder="Scoring Player"
-        >        
+          placeholder="Scoring Player..."
+        >
+        <input 
+          v-model="scoring_time"
+          type="text"
+          placeholder="Time..."
+        >
       </div>
     </BaseModal>
 
@@ -88,9 +96,15 @@
       <h3 slot="header">Add Card</h3>
       <div slot="body">
         <input 
+          v-model="card_player"
           type="text"
-          placeholder="Recieving Player"          
+          placeholder="Recieving Player..."          
         >        
+        <input 
+          v-model="card_type"
+          type="text"
+          placeholder="Card Type..."
+        >
       </div>
     </BaseModal>
 
@@ -100,6 +114,7 @@
 <script>
   import BaseCard from './BaseCard'
   import BaseModal from './BaseModal'
+  import {api} from './../services/Api'
 
   export default {
     name: 'BaseMatch',
@@ -113,23 +128,45 @@
       return {
         modal_field: false,
         modal_goal: false,
-        modal_card: false
+        modal_card: false,
+        new_field: '',
+        scoring_player: '',
+        scoring_team: '',
+        scoring_time: '',
+        card_player: '',
+        card_type: ''
+
       }
     },
 
     methods: {
       changeField() {
         console.log(`from field`)
+
+        api.put(`/fields?match=${this.match.id}&field=${this.new_field}`)
+        this.match.field = this.new_field
+
         this.modal_field = false
       },
 
       addGoal() {
         console.log(`from goal`)
+        
+        this.scoring_team.toLowerCase() == this.match.team1.toLowerCase() ?
+          this.match.score1++ : this.match.score2++
+        
+
+        api.post(`/teams?match=${this.match.id}&player=${this.scoring_player}&time=${this.scoring_time}`)
+        
+        
         this.modal_goal = false
       },
 
       addCard() {
         console.log(`from card`)
+        
+        api.post(`/players?player=${this.card_player}&card=${this.card_type}`)
+
         this.modal_card = false
       }
     }
