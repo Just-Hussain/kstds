@@ -37,6 +37,10 @@ module.exports = (app, conn) => {
 		// inserts into Goals table:
 		// matchID, torID, playerID, time
 		// data is in req.query
+		let q = req.query
+		console.log(`new goal from: ${q.player}, in ${q.match}, at ${q.time}`);
+		res.status(200).send()
+		
 	})
 
 	
@@ -70,6 +74,7 @@ module.exports = (app, conn) => {
 	app.post('/matches', (req, res) => {
 
 		console.log(`q id: ${req.query.id}`);
+		res.status(200).send()
 		
 		// inserts into Match table:
 		// matchID, torID, date, time, teams, field, referee
@@ -82,11 +87,15 @@ module.exports = (app, conn) => {
 		// update the field of the given match
 		// matchId, field ?
 		// data is in req.query
+
+		console.log(`q new field: ${req.query.field} with id: ${req.query.match}`);
+		res.status(200).send()
+
 	})
 
 
 	app.get('/players', (req, res) => {
-
+		// TODO
 		// selects from Goals and Player:
 		// each player with more than 2 gaals
 		// res.send array of objects
@@ -97,6 +106,10 @@ module.exports = (app, conn) => {
 		// inserts into Cards table:
 		// cardID, playerID, cardType, cardDesc
 		// data is in req.query
+
+		console.log(`card: ${req.query.card}, for: ${req.query.player}`);
+		res.status(200).send()
+
 	})
 
 	app.get('/player', (req, res) => {
@@ -107,27 +120,17 @@ module.exports = (app, conn) => {
 	})
 
 
-	app.get('/referees', (req, res) => {
-
-		// !! probably redundant
-
-		// selects matches from db:
-		// by a given referee
-		// data is in req.query
-	})
-
-
 }
 
 
 
 class Team {
   constructor(
-    id, name, players=[], scored, recieved, points, rank
+    id, name, players=[], scored=0, recieved=0, points=0, rank=0
   ) {
     this.id = id
     this.name = name
-    this.player = players
+    this.players = players
     this.scored = scored
     this.recieved = recieved
     this.points = points
@@ -149,5 +152,18 @@ class Match {
       this.goals = goals
       this.score1 = score1
       this.score2 = score2
+    }
+}
+
+class Player {
+  constructor(
+    id, first_name, last_name, team, goals, cards
+    ) {
+      this.id = id
+      this.first_name = first_name
+      this.last_name = last_name
+      this.team = team
+      this.goals = goals
+      this.cards = cards
     }
 }
