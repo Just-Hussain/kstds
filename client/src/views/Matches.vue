@@ -84,12 +84,9 @@
       },
 
       listByReferee() {
-        // filter the matches array
-        // based on the given referee.
-        // insted of using matches array
-        // in the Base Match v-for
-        // a computed array can be used
         
+        // TODO: ability to reverese the filtering
+        // currently it only recovers by refreshing
         console.log(`from by referee`);
 
         this.matches = this.matches.filter((match) => {
