@@ -1,16 +1,23 @@
 # KSTDS
-
+KFUPM Soccer Tournament Database System
 ## Project setup
 ```
 npm install
 ```
 
 ### Compiles and hot-reloads for development
+From **client** folder for the front-end:
 ```
-npm run serve
+npm run serve 
 ```
 
-### Compiles and minifies for production
+From **server** folder for back-end:
+```
+npm start
+```
+
+
+### Compiles and minifies for production (client)
 ```
 npm run build
 ```

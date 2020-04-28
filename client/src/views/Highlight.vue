@@ -9,6 +9,8 @@
 <script>
   import BaseTable from './../components/BaseTable'
 
+  // TODO: this whole view
+
   export default {
     name: 'Highlight',
     components: {

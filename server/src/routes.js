@@ -96,7 +96,7 @@ module.exports = (app, conn) => {
 
 
 	app.get('/players', (req, res) => {
-		// TODO
+		// TODO: for <Highlight> view
 		// selects from Goals and Player:
 		// each player with more than 2 gaals
 		// res.send array of objects

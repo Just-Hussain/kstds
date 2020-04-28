@@ -78,6 +78,12 @@
       addMatch() {
         console.log(`from add match`);
 
+        // TODO: this does not reflect on current content
+        // only sends data to server so it needs fixing
+        // and takes team as name only,
+        // and now a match object should have a team object
+        // FIX
+        
         api.post(`/matches?id=${this.new_match.id}&date=${this.new_match.date}&time=${this.new_match.time}&team1=${this.new_match.team1}&team2=${this.new_match.team2}&field=${this.new_match.field}&referee=${this.new_match.referee}`)
 
         this.modal_match = false
