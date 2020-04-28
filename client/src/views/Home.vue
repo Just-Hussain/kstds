@@ -22,8 +22,8 @@
           <td>{{match.id}}</td>
           <td>{{match.date}}</td>
           <td>{{match.time}}</td>
-          <td>{{match.team1}}</td>
-          <td>{{match.team2}}</td>
+          <td>{{match.team1.name}}</td>
+          <td>{{match.team2.name}}</td>
           <td>{{match.field}}</td>
           <td>{{match.referee}}</td>
         </tr>
