@@ -49,33 +49,23 @@ module.exports = (app, conn) => {
 		// selects from Match table:
 		// data, field, time, referee, teams of each match
 		// res.send array of objects
-		let players = [
-			new Player(0, 'Player X', 0),
-			new Player(1, 'Player Y', 0)
-		]
+
 		// !! dumy data for testing !!
-		let dummy = [
-			new Match(
-				0, '01-01-2020', '16:30',
-				new Team(0, 'Team X', players), 
-				new Team(1, 'Team Y', players), 
+		let dummy = []
+		for (let i = 0; i < 5; i++) {
+			
+			let players = [
+				new Player(i, 'Player X', 0),
+				new Player(i+1, 'Player Y', 0)
+			]
+			dummy.push(
+				new Match(
+				i, '01-01-2020', '16:30',
+				new Team(i, 'Team X', players), 
+				new Team(i+1, 'Team Y', players), 
 				'Field X', 'Referee X'
-			),
-			new Match(
-				1, '01-01-2020', '16:30',
-				new Team(2, 'Team X', players), 
-				new Team(3, 'Team Y', players), 
-				'Field X', 'Referee X'
-			),
-			new Match(
-				2, '01-01-2020', '16:30',
-				new Team(4, 'Team X', players), 
-				new Team(5, 'Team Y', players), 
-				'Field X', 'Referee X'
-			)
-		]
-
-
+			))
+		}
 
 		console.log(`sending matches array`)
 		res.send(dummy)
