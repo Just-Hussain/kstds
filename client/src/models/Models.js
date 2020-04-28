@@ -33,11 +33,11 @@ export class Match {
 
 export class Team {
   constructor(
-    id, name, players=[], scored, recieved, points, rank
+    id, name, players=[], scored=0, recieved=0, points=0, rank=0
   ) {
     this.id = id
     this.name = name
-    this.player = players
+    this.players = players
     this.scored = scored
     this.recieved = recieved
     this.points = points
