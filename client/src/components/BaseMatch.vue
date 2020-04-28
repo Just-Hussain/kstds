@@ -6,17 +6,22 @@
           
           <div class="match-header">
             <h2>
-              <span class="team one"> {{match.team1}} </span>
+              <span class="team one"> {{match.team1.name}} </span>
               <span class="score"> 
                 {{match.score1}} - {{match.score2}} 
               </span>
-              <span class="team two"> {{match.team2}} </span>
+              <span class="team two"> {{match.team2.name}} </span>
             </h2>
           </div>
 
           <div class="inner left">
             <h3>By Player</h3>
-            <p>PlayerX = Y</p>
+            <p
+              v-for="player in match.team1.players"
+              :key="player.id"
+            >
+              {{player.name}} = {{player.goals}}
+            </p>
           </div>
 
           <div class="inner middle">
@@ -32,7 +37,12 @@
 
           <div class="inner right">
             <h3>By Player</h3>
-            <p>PlayerX = Y</p>
+            <p
+              v-for="player in match.team1.players"
+              :key="player.id"
+            >
+              {{player.name}} = {{player.goals}}
+            </p>
           </div>
   
         </div> 
@@ -164,7 +174,7 @@
 
       addCard() {
         console.log(`from card`)
-        
+
         api.post(`/players?player=${this.card_player}&card=${this.card_type}`)
 
         this.modal_card = false
