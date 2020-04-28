@@ -114,10 +114,19 @@ module.exports = (app, conn) => {
 	})
 
 	app.get('/player', (req, res) => {
-
+		
 		// selects a player from db:
 		// given team and given match
 		// data is in req.query
+	
+		console.log(`team: ${req.query.team}, match: ${req.query.match}`)
+		
+		let dummy = []
+		for (let i = 0; i < 20; i++) {
+			dummy.push(`guy no. ${i}`)
+		}
+		
+		res.send(dummy)
 	})
 
 
