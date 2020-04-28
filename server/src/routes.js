@@ -49,22 +49,33 @@ module.exports = (app, conn) => {
 		// selects from Match table:
 		// data, field, time, referee, teams of each match
 		// res.send array of objects
-
+		let players = [
+			new Player(0, 'Player X', 0),
+			new Player(1, 'Player Y', 0)
+		]
 		// !! dumy data for testing !!
 		let dummy = [
 			new Match(
 				0, '01-01-2020', '16:30',
-				'Team X', 'Team Y', 'Field X', 'Referee X'
+				new Team(0, 'Team X', players), 
+				new Team(1, 'Team Y', players), 
+				'Field X', 'Referee X'
 			),
 			new Match(
 				1, '01-01-2020', '16:30',
-				'Team X', 'Team Y', 'Field X', 'Referee Y'
+				new Team(2, 'Team X', players), 
+				new Team(3, 'Team Y', players), 
+				'Field X', 'Referee X'
 			),
 			new Match(
 				2, '01-01-2020', '16:30',
-				'Team X', 'Team Y', 'Field X', 'Referee X'
+				new Team(4, 'Team X', players), 
+				new Team(5, 'Team Y', players), 
+				'Field X', 'Referee X'
 			)
 		]
+
+
 
 		console.log(`sending matches array`)
 		res.send(dummy)
@@ -155,15 +166,13 @@ class Match {
     }
 }
 
+// stripped version
 class Player {
   constructor(
-    id, first_name, last_name, team, goals, cards
+    id, name, goals
     ) {
       this.id = id
-      this.first_name = first_name
-      this.last_name = last_name
-      this.team = team
+      this.name = name
       this.goals = goals
-      this.cards = cards
     }
 }
