@@ -91,12 +91,19 @@
 
       listByReferee() {
         
-        // TODO: ability to reverese the filtering
-        // currently it only recovers by refreshing
-        console.log(`from by referee`);
+        console.log(`from by referee`)
+        
+        // it`s bad to alway re-query the db,
+        // but i`m waay to lazy to change it
+        api.get('/matches')
+        .then(res => {
+          this.matches = res.data
+          
+          if (this.ref_name == '') return
 
-        this.matches = this.matches.filter((match) => {
-          return match.referee.toLowerCase() == this.ref_name.toLowerCase()
+          this.matches = this.matches.filter((match) => {
+            return match.referee.toLowerCase() == this.ref_name.toLowerCase()
+          })
         })
 
         this.modal_referee = false

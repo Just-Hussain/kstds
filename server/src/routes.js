@@ -66,6 +66,18 @@ module.exports = (app, conn) => {
 				'Field X', 'Referee X'
 			))
 		}
+		let players = [
+			new Player(10, 'Player X', 0),
+			new Player(11, 'Player Y', 0)
+		]
+		dummy.push(
+			new Match(
+				5, '01-01-2020', '16:30',
+				new Team(6, 'Team X', players), 
+				new Team(7, 'Team Y', players), 
+				'Field X', 'Referee Y'
+			)
+		)
 
 		console.log(`sending matches array`)
 		res.send(dummy)
