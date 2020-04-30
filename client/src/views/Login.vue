@@ -8,7 +8,7 @@
     <input v-model="userName" placeholder="enter username" > 
     <br><br>
     <img src="./../assets/Key.png" class="loginimg">
-    <input v-model="passWord" placeholder="enter password"> 
+    <input v-model="passWord" placeholder="enter password" type="password"> 
     <br><br>
     <button @click="LogUserIn">
       Login
