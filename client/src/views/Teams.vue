@@ -154,7 +154,7 @@
   .filter-modal table {
     display: block;
     width: max-content;
-    max-height: 470px;
+    max-height: 350px;
     overflow-y: scroll;
   }
   
