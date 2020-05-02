@@ -5,14 +5,58 @@
       <router-link to="/">Tournaments</router-link>
       <router-link to="/highlight">Highlights</router-link>
       <router-link to="/teams">Teams</router-link>
-      <router-link to="/login">Login</router-link>
+      <button v-if="flag" @click="logout">Logout</button>
+      <router-link v-else to="/login">Login</router-link>
     </div>
   </div>
 </template>
 
 <script>
+  import {bus} from './../main'
+
+  
+
   export default {
-    name: 'AppHeader'
+    name: 'AppHeader',
+
+    // this is to decide wether to show
+    // the log in or log out button.
+    // it is achived by listening to an event
+    // fired by the login view, or the logout button
+    created: function() {
+      let self = this // because the callback changes the scope
+      bus.$on('auth', function(ev) {
+        console.log(`from auth header: ${ev}`)
+        self.flag = ev
+      })
+    },
+
+    data() {
+      return {
+        // taked if user logged in or out from the <auth> listener
+        flag: false
+      }
+    },
+
+    methods: {
+
+      logout() {
+        // notify other compnents that the user has logged out
+        bus.$emit('auth', false)
+
+        // firebase.auth()
+        // .signOut()
+        // .then(function() {
+        //   // Sign-out successful.
+        //   console.log('signed out')
+          
+        // }).catch(function(err) {
+        //   console.log(`err out ${err}`)
+        // })
+      
+      }
+    }
+    
   }
 </script>
 

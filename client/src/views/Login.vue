@@ -11,7 +11,7 @@
     <input v-model="passWord" placeholder="enter password" type="password"> 
     <br><br>
     <button @click="LogUserIn">
-      Login
+      Login 
     </button>
     <br>
     
@@ -21,6 +21,25 @@
 </template>
 
 <script>
+  import {bus} from './../main'
+
+ // console.log(`g var: ${this.$loggedIn}`)
+
+  firebase.auth()
+  .onAuthStateChanged(function(user) {
+    if (user) {
+      // User is signed in.
+      console.log(`user in bruh`)
+      
+      console.log(user)
+      
+      
+
+    } else {
+      // User is signed out.
+      console.log(`user null burh`)
+    }
+  })
 
 
   // TODO: backend stuff
@@ -30,22 +49,40 @@
     data()
     {
       return {
-      userName: '',
-      passWord: ''
+        userName: '',
+        passWord: ''
       }
     },
-  methods:
-  {
-    LogUserIn() 
-    {
-      //here we send the info to the server
-      this.userName='',
-      this.passWord=''
-      //here we would check if true or false\
-      //if false borders go red, lets see how it goes
-    }
 
-  }
+    methods:
+    {
+      LogUserIn() 
+      {
+        bus.$emit('auth', true)
+        // firebase.auth()
+        // .createUserWithEmailAndPassword(this.userName, this.passWord)
+        // .catch(function(err) {
+        //   // Handle Errors here.
+          
+        //   console.log(`err up bruh: ${err}`)        
+        // })
+
+        // firebase.auth()
+        // .signInWithEmailAndPassword(this.userName, this.passWord)
+        // .catch(function(err) {
+        //   // Handle Errors here.
+
+        //   console.log(`err in bruh: ${err}`)
+        // });
+        //here we send the info to the server
+        this.userName='',
+        this.passWord=''
+        //here we would check if true or false\
+        //if false borders go red, lets see how it goes
+      }
+
+    }
+  
   }
 </script>
 
