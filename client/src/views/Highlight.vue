@@ -1,40 +1,59 @@
 <template>
   <main>
-    <h1>ur html goes here, inside of main</h1>
-    <h2>{{ test }}</h2>
-    <h3>{{ test2 }}</h3>
+    <h1>Highlights</h1>
+    <h2>Players Who Scored More Than Two Goals</h2>
+    <BaseTable style="color:#fff">
+      <tr>
+        <th>ID</th>
+        <th>Player</th>
+        <th># Goals</th>
+      </tr>
+
+      <tr v-for="player in players" :key="player.id">
+        <td>{{player.id}}</td>
+        <td>{{player.last_name}}, {{player.first_name}}</td>
+        <td>{{player.goals}}</td>
+      </tr>
+    </BaseTable>
   </main>
 </template>
 
 <script>
-  import BaseTable from './../components/BaseTable'
+import BaseTable from "./../components/BaseTable";
+import { Player } from "./../models/Models.js";
 
-  // TODO: this whole view
+// TODO: this whole view
 
-  export default {
-    name: 'Highlight',
-    components: {
-      BaseTable
-    },
+export default {
+  name: "Highlight",
+  components: {
+    BaseTable
+  },
 
-    data() {
-      // ur data goes inside the retuned object 
-      // comma-serperated
-      return {
-        test: 'hi',
-        test2: 'sub'
-      }
-    },
+  data() {
+    // ur data goes inside the retuned object
+    // comma-serperated
+    return {
+      players: [
+        new Player(1, "Ahmad", "Al-Khaledi", "XXX", 4, "none"),
+        new Player(2, "Salman", "Al-Ghamdi", "YYY", 3, "none")
+      ]
+    };
+  },
 
-    methods: {
-      // methods goes here, comma-serperated
-    }
+  methods: {
+    // methods goes here, comma-serperated
   }
+};
 </script>
 
 <style scoped>
-  /* styling goes here */
-  h1 {
-    color: blue;
-  }
+/* styling goes here */
+h1 {
+  color: white;
+}
+
+h2 {
+  font-style: italic;
+}
 </style>
