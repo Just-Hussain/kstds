@@ -12,6 +12,11 @@
 	import BaseCard from './components/BaseCard'
 	import Home from './views/Home'
 	
+	import config from './config'
+	console.log(config.fb)
+
+	firebase.initializeApp(config.fb)
+	
 	export default {
 		name: 'App',
 		components: {

@@ -1,102 +1,97 @@
 <template>
-  <main id="Login">
-    <br>
-    <img src="./../assets/Logo.png" class="logo" >
+<main id="Login">
+  <br />
+  <img src="./../assets/Logo.png" class="logo" />
   <body>
-    <br>
-    <img src="./../assets/ID.png" class="loginimg">
-    <input v-model="userName" placeholder="enter username" > 
-    <br><br>
-    <img src="./../assets/Key.png" class="loginimg">
-    <input v-model="passWord" placeholder="enter password" type="password"> 
-    <br><br>
-    <button @click="LogUserIn">
-      Login 
-    </button>
-    <br>
-    
-    
+    <br />
+    <img src="./../assets/ID.png" class="loginimg" />
+    <input :class="{err}" v-model="userName" placeholder="enter username" />
+    <br />
+    <br />
+    <img src="./../assets/Key.png" class="loginimg" />
+    <input :class="{err}" v-model="passWord" placeholder="enter password" type="password" />
+    <br />
+    <br />
+    <button @click="LogUserIn">Login</button>
+    <br />
   </body>
-  </main>
+</main>
 </template>
 
 <script>
-  import {bus} from './../main'
-
- // console.log(`g var: ${this.$loggedIn}`)
+  import { bus } from "./../main";
 
   firebase.auth()
   .onAuthStateChanged(function(user) {
     if (user) {
       // User is signed in.
-      console.log(`user in bruh`)
-      
-      console.log(user)
-      
-      
+      console.log(`user in bruh`);
 
+      console.log(user);
     } else {
       // User is signed out.
-      console.log(`user null burh`)
+      console.log(`user null burh`);
     }
-  })
-
+  });
 
   // TODO: backend stuff
 
   export default {
-    name: 'Login',
-    data()
-    {
+    name: "Login",
+
+    data() {
       return {
-        userName: '',
-        passWord: ''
-      }
+        userName: "",
+        passWord: "",
+        err: false
+      };
     },
 
-    methods:
-    {
-      LogUserIn() 
-      {
-        bus.$emit('auth', true)
-        // firebase.auth()
-        // .createUserWithEmailAndPassword(this.userName, this.passWord)
-        // .catch(function(err) {
-        //   // Handle Errors here.
-          
-        //   console.log(`err up bruh: ${err}`)        
-        // })
+    methods: {
+      LogUserIn() {
+        
+        if (this.userName.toLowerCase() == 'admin@kstds.com') {
+          // notify other components that a user has logged in
+          bus.$emit("auth", true);
+          this.err = false // clear any prev errs
+          // nav to home upon signing in
+          this.$router.push('/')
 
-        // firebase.auth()
-        // .signInWithEmailAndPassword(this.userName, this.passWord)
-        // .catch(function(err) {
-        //   // Handle Errors here.
-
-        //   console.log(`err in bruh: ${err}`)
-        // });
-        //here we send the info to the server
-        this.userName='',
-        this.passWord=''
-        //here we would check if true or false\
-        //if false borders go red, lets see how it goes
+          // login using firebase
+          firebase.auth()
+          .signInWithEmailAndPassword(this.userName, this.passWord)
+          .then(function() {
+            console.log('logging in worked aight')
+            
+          })
+          .catch(function(err) {
+            console.log(`err in bruh: ${err}`)
+          })
+        }
+        else {
+          this.err = true
+        }
+        
+        this.userName = ""
+        this.passWord = ""
       }
-
     }
-  
-  }
+  };
 </script>
 
 <style scoped>
-  h1 {
-    color:forestgreen;
+  .err {
+    border: red solid 5px;  
   }
-  input
-  {
+
+  h1 {
+    color: forestgreen;
+  }
+  input {
     padding: 15px;
     border-radius: 7ch;
-    height:3ch;
+    height: 3ch;
     width: 40ch;
-    
   }
   button {
     background: #42b983;
@@ -112,7 +107,7 @@
     margin-right: 4px;
     vertical-align: middle;
   }
-  .logo{
+  .logo {
     width: 16ch;
     height: 16ch;
   }
