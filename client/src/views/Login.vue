@@ -34,8 +34,6 @@
     }
   });
 
-  // TODO: backend stuff
-
   export default {
     name: "Login",
 
