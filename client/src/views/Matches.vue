@@ -2,7 +2,7 @@
   <main>
     <h1>Matches</h1>
     
-    <button @click="modal_match = true">Add Match</button>
+    <button v-if="flag" @click="modal_match = true">Add Match</button>
     <button @click="modal_referee = true">List by Referee</button>
 
     <BaseModal
@@ -39,6 +39,7 @@
 
     <BaseMatch
       :match="match"
+      :flag="flag"
       v-for="match in matches"
       :key="match.id"
     >
@@ -52,6 +53,7 @@
   import BaseModal from './../components/BaseModal'
   import {Match} from './../models/Models'
   import {api} from './../services/Api'
+  import {bus} from './../main'
 
   export default {
     name: 'Matches',
@@ -60,17 +62,31 @@
       BaseModal
     },
 
+    mounted: function() {
+      // * using mounted because created does not work well with router
+      
+      // updaing the flag first here because the flag is reset
+      // every time the site navigates to this view i guess
+      // so this makes sure what is the current status
+      this.flag = firebase.auth().currentUser ? true : false
+  
+      console.log(`created from match flag: ${this.flag}`)
+      
+      let self = this; // because the callback changes the scope
+      bus.$on("auth", function(ev) {
+        self.flag = ev
+        console.log(`from auth matches: ${ev}, flag: ${self.flag}`)
+      });
+    },
+
     data() {
-      // matches should be refactored to an abstract class
-      // it still does not handle players and thiers goals
-      // later on, populating the array should be on mounted
-      // and from the database using a match service or such
       return {
         modal_match: false,
         modal_referee: false,
         matches: [],
         ref_name: '',
-        new_match: new Match()
+        new_match: new Match(),
+        flag: false
       }
     },
 
