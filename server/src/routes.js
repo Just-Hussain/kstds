@@ -112,6 +112,18 @@ module.exports = (app, conn) => {
 		// selects from Goals and Player:
 		// each player with more than 2 gaals
 		// res.send array of objects
+		let dummy = []
+		for (let i = 0; i < 10; i++) {
+			dummy.push({
+				id: i,
+				first_name: 'XXXXXX',
+				last_name: 'YYYYYY',
+				goals: -1
+			})
+		}
+		console.log(`sending highlight array`)
+		res.status(200).send(dummy)
+		
 	})
 
 	app.post('/players', (req, res) => {
