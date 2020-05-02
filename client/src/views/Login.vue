@@ -47,7 +47,9 @@
 
     methods: {
       LogUserIn() {
-        
+        // TODO: wrong password check
+        // currently, it notifies other components that
+        // a user has logged in even if the password was wrong
         if (this.userName.toLowerCase() == 'admin@kstds.com') {
           // notify other components that a user has logged in
           bus.$emit("auth", true);
