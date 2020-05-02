@@ -1,6 +1,9 @@
 client/node_modules/
 server/node_modules/
 
+# firebase config
+client/src/config.js
+
 # Log files
 npm-debug.log*
 yarn-debug.log*
