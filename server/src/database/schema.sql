@@ -10,7 +10,7 @@ SHOW TABLES;
 -- !! order of executing these does not matter !! --
 -- done
 CREATE TABLE Department ( 
-  deptID int not null, 
+  deptID int , 
   codet varchar(255), 
   name varchar(255), 
    
@@ -19,7 +19,7 @@ CREATE TABLE Department (
 
 -- done
 CREATE TABLE Category ( 
-  catID int not null, 
+  catID int , 
   name varchar(255), 
   descc varchar(255), 
    
@@ -28,7 +28,7 @@ CREATE TABLE Category (
 
 -- done
 CREATE TABLE Fieldt ( 
-  fieldID int not null, 
+  fieldID int , 
   name varchar(255), 
   descc varchar(255), 
   Avalible Boolean,
@@ -38,7 +38,7 @@ CREATE TABLE Fieldt (
 
 -- done
 CREATE TABLE Team ( 
-  teamID int not null, 
+  teamID int , 
   name varchar(255), 
    
   primary key (teamID) 
@@ -46,7 +46,7 @@ CREATE TABLE Team (
 
 -- done
 CREATE TABLE Tournament ( 
-  torID int not null, 
+  torID int , 
   name varchar(255), 
   startDate date, 
   endDate date, 
@@ -55,7 +55,7 @@ CREATE TABLE Tournament (
 
 -- done
 CREATE TABLE contactType ( 
-  contTypeID int not null, 
+  contTypeID int , 
   name varchar(255), 
   descc varchar(255), 
    
@@ -67,8 +67,8 @@ CREATE TABLE contactType (
 
 -- done
 CREATE TABLE Type ( 
-  typeID int not null, 
-  catID int not null, 
+  typeID int , 
+  catID int , 
   name varchar(255), 
    
   primary key (typeID), 
@@ -77,11 +77,11 @@ CREATE TABLE Type (
 
 -- done
 CREATE TABLE Actor ( 
-  kfupmID int not null, 
+  kfupmID int , 
   fName varchar(255), 
   lName varchar(255), 
-  deptID int not null, 
-  typeID int not null, 
+  deptID int , 
+  typeID int , 
    
   primary key (kfupmID), 
   foreign key (deptID) references Department(deptID), 
@@ -102,7 +102,6 @@ CREATE TABLE Players(
   playerID int,
   playerNumber int,
   kfupmID int,
-  goalsId int,
   goalsTotal int,
   
  
@@ -140,8 +139,8 @@ CREATE TABLE Cards(
 
 -- done
 CREATE TABLE Contact ( 
-  kfupmID int not null, 
-  contTypeID int not null, 
+  kfupmID int , 
+  contTypeID int , 
   valuec varchar(255), 
    
   foreign key (kfupmID) references Actor(kfupmID), 
@@ -151,10 +150,10 @@ CREATE TABLE Contact (
 
 -- done
 CREATE TABLE Matcht ( 
-  matchID int not null, 
-  team1ID int not null, 
-  team2ID int not null, 
-  fieldID int not null, 
+  matchID int , 
+  team1ID int , 
+  team2ID int , 
+  fieldID int , 
   datet date, 
   timec int, 
   team1Goals int, 
@@ -172,9 +171,9 @@ CREATE TABLE Matcht (
 
 -- done
 CREATE TABLE MatchActor ( 
-  matchID int not null, 
-  kfupmID int not null, 
-  typeID int not null, 
+  matchID int , 
+  kfupmID int , 
+  typeID int , 
    
   foreign key (matchID) references Matcht(matchID),
   foreign key (kfupmID) references Actor(kfupmID), 
@@ -183,9 +182,9 @@ CREATE TABLE MatchActor (
 
 -- done
 CREATE TABLE Eventt ( 
-  matchID int not null, 
-  kfupmID int not null, 
-  typeID int not null, 
+  matchID int , 
+  kfupmID int , 
+  typeID int , 
   timec int, 
    
   foreign key (matchID) references Matcht(matchID), 
@@ -209,16 +208,14 @@ CREATE TABLE Goals(
   foreign key (matchID) references Matcht(matchID)
  
 );
-ALTER TABLE Players
-ADD FOREIGN KEY (goalsId) references Goals(goalsId);
 
 
 -- done
 CREATE TABLE TorActor ( 
-  torID int not null, 
-  kfupmID int not null, 
-  teamID int not null, 
-  typeID int not null, 
+  torID int , 
+  kfupmID int , 
+  teamID int , 
+  typeID int , 
    
   PRIMARY KEY (torID, kfupmID, teamID, typeID),
   foreign key (torID) references Tournament(torID), 
