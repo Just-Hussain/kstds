@@ -40,7 +40,18 @@
 			databse: ''
 		}
 	*/
-	let conn = {}
+	let conn = await mysql.createConnection({
+		host: 'localhost',
+		user: 'root',
+		password: '0000',
+		database: 'kstds'
+	})
+
+	let q = await conn.query('SHOW TABLES')
+	console.log(q);
+	
+	
+	
 	// pass express instance
 	// and mysql connection
 	routes(app, conn)
