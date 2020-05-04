@@ -47,8 +47,6 @@
 		database: 'kstds'
 	})
 
-	let q = await conn.query('SHOW TABLES')
-	console.log(q);
 	
 	
 	

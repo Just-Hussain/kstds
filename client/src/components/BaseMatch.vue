@@ -5,9 +5,9 @@
         <div class="match">
           <div class="match-header">
             <h2>
-              <span class="team one">{{match.team1.name}}</span>
+              <span class="team one">{{match.team1.id}}: {{match.team1.name}}</span>
               <span class="score">{{match.score1}} - {{match.score2}}</span>
-              <span class="team two">{{match.team2.name}}</span>
+              <span class="team two">{{match.team2.id}}: {{match.team2.name}}</span>
             </h2>
           </div>
 
@@ -16,7 +16,9 @@
             <p
               v-for="player in match.team1.players"
               :key="player.id"
-            >{{player.name}} = {{player.goals}}</p>
+            >
+              {{player.id}}: {{player.name}} = {{player.goals}}
+            </p>
           </div>
 
           <div class="inner middle">
@@ -24,10 +26,6 @@
             <p>{{match.field}}</p>
             <h3>Date</h3>
             <p>{{match.date}}</p>
-            <h3>Time</h3>
-            <p>{{match.time}}</p>
-            <h3>Referee</h3>
-            <p>{{match.referee}}</p>
           </div>
 
           <div class="inner right">
@@ -35,7 +33,9 @@
             <p
               v-for="player in match.team2.players"
               :key="player.id"
-            >{{player.name}} = {{player.goals}}</p>
+            >
+              {{player.id}}: {{player.name}} = {{player.goals}}
+            </p>
           </div>
         </div>
       </BaseCard>
@@ -56,23 +56,28 @@
       <h3 slot="header">Change Field</h3>
       <div slot="body">
         <input v-model="new_field" type="text" placeholder="New Field Name" />
+        <input v-model="fieldid" type="text" placeholder="New Field ID" />
       </div>
     </BaseModal>
 
     <BaseModal v-if="modal_goal" action="add-goal" @close="modal_goal = false" @add-goal="addGoal">
       <h3 slot="header">Add Goal</h3>
       <div slot="body">
+        <input v-model="goalid" type="text" placeholder="Goal ID..." />
         <input v-model="scoring_team" type="text" placeholder="Scoring Team..." />
         <input v-model="scoring_player" type="text" placeholder="Scoring Player..." />
-        <input v-model="scoring_time" type="text" placeholder="Time..." />
+        <input v-model="scoring_id" type="text" placeholder="Scoring Player ID..." />
+        <input v-model="time" type="text" placeholder="Scoring Time..." />
       </div>
     </BaseModal>
 
     <BaseModal v-if="modal_card" action="add-card" @close="modal_card = false" @add-card="addCard">
       <h3 slot="header">Add Card</h3>
       <div slot="body">
+        <input v-model="cardid" type="text" placeholder="Card ID..." />
         <input v-model="card_player" type="text" placeholder="Recieving Player..." />
         <input v-model="card_type" type="text" placeholder="Card Type..." />
+
       </div>
     </BaseModal>
   </main>
@@ -99,11 +104,16 @@ export default {
       modal_goal: false,
       modal_card: false,
       new_field: "",
+      fieldid: '',
       scoring_player: "",
       scoring_team: "",
-      scoring_time: "",
       card_player: "",
-      card_type: ""
+      card_type: "",
+      scoring_id: '',
+      scoring_teamid: '',
+      time: '',
+      goalid: '',
+      cardid: ''
     };
   },
 
@@ -111,7 +121,7 @@ export default {
     changeField() {
       console.log(`from field`);
 
-      api.put(`/fields?match=${this.match.id}&field=${this.new_field}`);
+      api.put(`/fields?match=${this.match.id}&field=${this.fieldid}`);
       this.match.field = this.new_field;
 
       this.modal_field = false;
@@ -147,7 +157,7 @@ export default {
       }
 
       api.post(
-        `/teams?match=${this.match.id}&player=${this.scoring_player}&time=${this.scoring_time}`
+        `/teams?goal=${this.goalid}&match=${this.match.id}&player=${this.scoring_id}&time=${this.time}`
       );
 
       this.modal_goal = false;
@@ -156,7 +166,7 @@ export default {
     addCard() {
       console.log(`from card`);
 
-      api.post(`/players?player=${this.card_player}&card=${this.card_type}`);
+      api.post(`/players?id=${this.cardid}&player=${this.card_player}&card=${this.card_type}`);
 
       this.modal_card = false;
     }
@@ -165,9 +175,15 @@ export default {
 </script>
 
 <style scoped>
+main {
+  font-size: 6px;
+}
 .match {
-  max-width: 660px;
+  max-width: max-content;
+  min-height: max-content;
   margin: auto;
+  margin-bottom:50px ;
+
 }
 
 .inner {

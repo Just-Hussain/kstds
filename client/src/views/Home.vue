@@ -8,11 +8,9 @@
         <tr>
           <th>Match No.</th>
           <th>Date</th>
-          <th>Time</th>
           <th>Team 1</th>
           <th>Team 2</th>
           <th>Field</th>
-          <th>Referee</th>
         </tr>
 
         <tr 
@@ -21,11 +19,9 @@
         >
           <td>{{match.id}}</td>
           <td>{{match.date}}</td>
-          <td>{{match.time}}</td>
           <td>{{match.team1.name}}</td>
           <td>{{match.team2.name}}</td>
           <td>{{match.field}}</td>
-          <td>{{match.referee}}</td>
         </tr>
         
 

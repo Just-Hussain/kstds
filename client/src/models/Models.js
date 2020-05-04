@@ -16,15 +16,13 @@ export class Tournament {
 
 export class Match {
   constructor(
-    id, date, time, team1, team2, field, referee, goals, score1=0, score2=0
+    id, date, team1, team2, field, goals=0, score1=0, score2=0
   ) {
       this.id = id
       this.date = date
-      this.time = time
       this.team1 = team1
       this.team2 = team2
       this.field = field
-      this.referee = referee
       this.goals = goals
       this.score1 = score1
       this.score2 = score2

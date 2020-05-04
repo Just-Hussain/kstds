@@ -5,15 +5,11 @@
       <h2>Players Who Scored More Than Two Goals</h2>
       <BaseTable style="color:#fff">
         <tr>
-          <th>ID</th>
           <th>Player</th>
-          <th># Goals</th>
         </tr>
 
         <tr v-for="player in players" :key="player.id">
-          <td>{{player.id}}</td>
           <td>{{player.last_name}}, {{player.first_name}}</td>
-          <td>{{player.goals}}</td>
         </tr>
       </BaseTable>
     </div>
