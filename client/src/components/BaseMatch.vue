@@ -26,6 +26,8 @@
             <p>{{match.field}}</p>
             <h3>Date</h3>
             <p>{{match.date}}</p>
+            <h3>Referee</h3>
+            <p>{{match.ref}}</p>
           </div>
 
           <div class="inner right">
@@ -176,7 +178,7 @@ export default {
 
 <style scoped>
 main {
-  font-size: 6px;
+  font-size: 10px;
 }
 .match {
   max-width: max-content;

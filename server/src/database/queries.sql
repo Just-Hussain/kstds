@@ -5,6 +5,7 @@
 
 
 
+
 -- R 2  -- DONE --
 SELECT fname, lname
 FROM Actor
@@ -19,6 +20,7 @@ WHERE kfupmID in (
 SELECT 
 M.matchID AS id,
 M.datet AS date,
+M.refreeid AS referee,
 F.name AS field,
 T1.name AS team1,
 T1.teamID AS team1ID,
@@ -35,6 +37,16 @@ FROM PlayerTeams as PT
 Join Players P on PT.playerid = P.playerid
 JOIN Actor A ON P.kfupmid = A.kfupmID
 WHERE PT.teamid = 1;
+
+
+-- FOR R 5 used with R 3
+SELECT fname
+FROM actor
+WHERE kfupmid in (
+  SELECT kfupmID
+  FROM refree
+  WHERE RefreeID = 17
+)
 
 
 -- R 4 -- DONE --

@@ -68,13 +68,13 @@ module.exports = (app, conn) => {
 		// data, field, time, referee, teams of each match
 		// res.send array of objects
 		(async function() {
-			console.log('ana klb')
 			
 			let q1 = 
 			`
 			SELECT 
 			M.matchID AS id,
 			M.datet AS date,
+			M.refreeid AS referee,
 			F.name AS field,
 			T1.name AS team1,
 			T1.teamID AS team1ID,
@@ -93,6 +93,7 @@ module.exports = (app, conn) => {
 			
 			let players1 = []
 			let players2 = []
+			let refs = []
 			for await (match of qres) {
 				
 				let t1 = await conn.query(
@@ -131,8 +132,32 @@ module.exports = (app, conn) => {
 				});
 				
 				players2.push(arr2)
+
+
+
+				let ref = await conn.query(
+					`
+					SELECT fname
+					FROM actor
+					WHERE kfupmid in (
+						SELECT kfupmID
+						FROM refree
+						WHERE RefreeID = ${match.referee}
+					)
+					`
+				)
+
+				refs.push(ref[0].fname)
+
+
 			}
 			
+			console.log(refs);
+			
+
+			
+
+			console.log('--------------');
 			console.log(qres)
 			console.log('--------------');
 			console.log(players1)
@@ -149,7 +174,7 @@ module.exports = (app, conn) => {
 						qres[i].id, (qres[i].date + '').substr(0, 15),
 						new Team(qres[i].team1ID, qres[i].team1, players1[i]),
 						new Team(qres[i].team2ID, qres[i].team2, players2[i]),
-						qres[i].field
+						qres[i].field, refs[i]
 					)
 				)
 			}
@@ -392,7 +417,7 @@ class Team {
 
 class Match {
   constructor(
-    id, date, team1, team2, field, goals=0, score1=0, score2=0
+    id, date, team1, team2, field, ref, goals=0, score1=0, score2=0
   ) {
       this.id = id
       this.date = date
@@ -401,7 +426,8 @@ class Match {
       this.field = field
       this.goals = goals
       this.score1 = score1
-      this.score2 = score2
+			this.score2 = score2,
+			this.ref = ref
     }
 }
 

@@ -118,7 +118,7 @@
           if (this.ref_name == '') return
 
           this.matches = this.matches.filter((match) => {
-            return match.referee.toLowerCase() == this.ref_name.toLowerCase()
+            return match.ref.toLowerCase() == this.ref_name.toLowerCase()
           })
         })
 

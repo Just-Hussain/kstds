@@ -342,3 +342,7 @@ update Players set goalsTotal= 3 where playerID=5;
 
 
 
+insert into Actor values (201511111, 'Ahemd', 'Al-AL', null, null);
+update actor set fname = 'Ahmed' where kfupmid = 201511111;
+insert into Refree values (10, 201511111);
+insert into Matcht values (5, 1, 2, 3, '2020-05-05', 1530, 0, 0, 10);

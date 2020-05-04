@@ -16,7 +16,7 @@ export class Tournament {
 
 export class Match {
   constructor(
-    id, date, team1, team2, field, goals=0, score1=0, score2=0
+    id, date, team1, team2, field, ref, goals=0, score1=0, score2=0
   ) {
       this.id = id
       this.date = date
@@ -26,6 +26,7 @@ export class Match {
       this.goals = goals
       this.score1 = score1
       this.score2 = score2
+      this.ref = ref
     }
 }
 
