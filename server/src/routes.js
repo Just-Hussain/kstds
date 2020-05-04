@@ -57,6 +57,41 @@ module.exports = (app, conn) => {
 			console.log(err)
 		})
 		
+		console.log(q.t);
+		
+
+		(async function() {
+			let curr = await conn.query(
+				`
+				SELECT team${q.t}Goals AS g
+				FROM Matcht
+				WHERE matchID = ${q.match}
+				`
+			)
+			console.log(`currrrr:`);
+			
+			console.log(curr);
+			
+			conn.query(
+				`
+				UPDATE Matcht SET team${q.t}Goals = ${(curr[0].g)+1}
+				WHERE matchID = ${q.match};
+				`
+			)
+			.then(res => {
+				console.log(`goal update well`);
+				console.log(res);
+				
+				
+			})
+			.catch(err => {
+				console.log(`goal update bad`);
+				console.log(err);
+			})
+
+		})()
+		
+
 		res.status(200).send()
 		
 	})

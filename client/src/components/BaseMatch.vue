@@ -137,12 +137,12 @@ export default {
       // its comparing by name
       // so duplicate names in the same team
       // will break it
-
+      let t = ''
       if (
         this.scoring_team.toLowerCase() == this.match.team1.name.toLowerCase()
       ) {
         this.match.score1++;
-
+        t = 1
         this.match.team1.players.filter(player => {
           player.name.toLowerCase() == this.scoring_player.toLowerCase()
             ? player.goals++
@@ -150,7 +150,7 @@ export default {
         });
       } else {
         this.match.score2++;
-
+        t = 2
         this.match.team2.players.filter(player => {
           player.name.toLowerCase() == this.scoring_player.toLowerCase()
             ? player.goals++
@@ -159,7 +159,7 @@ export default {
       }
 
       api.post(
-        `/teams?goal=${this.goalid}&match=${this.match.id}&player=${this.scoring_id}&time=${this.time}`
+        `/teams?goal=${this.goalid}&match=${this.match.id}&player=${this.scoring_id}&time=${this.time}&t=${t}`
       );
 
       this.modal_goal = false;

@@ -71,6 +71,18 @@ WHERE kfupmid in (
 
 
 
+UPDATE Matcht SET team1Goals = 1
+WHERE matchID = 4;
+
+
+SELECT team1Goals as g
+FROM Matcht
+WHERE matchID = 1;
+
+
+
+
+
 SELECT * from Matcht;
 SELECT * from Team;
 SELECT * from fieldt;
