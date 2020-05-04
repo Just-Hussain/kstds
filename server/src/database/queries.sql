@@ -34,7 +34,7 @@ JOIN Team T1 ON M.team1id = T1.teamID
 JOIN Team T2 ON M.team2id = T2.teamID;
 
 -- R 3 helper -- DONE --
-SELECT P.playerid, A.fname, A.lname
+SELECT P.playerid, A.fname, A.lname, P.goalsTotal AS goals
 FROM PlayerTeams as PT
 Join Players P on PT.playerid = P.playerid
 JOIN Actor A ON P.kfupmid = A.kfupmID
@@ -78,6 +78,37 @@ WHERE matchID = 4;
 SELECT team1Goals as g
 FROM Matcht
 WHERE matchID = 1;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+select count(playerID) as total
+from goals
+where playerID = 4 and matchid = 1;
+
+
+
+
+update players set goalsTotal = 0
+where playerID = 1
+
+
+
+
 
 
 
