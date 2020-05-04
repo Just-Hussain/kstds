@@ -17,21 +17,40 @@ module.exports = (app, conn) => {
 		// goals scored, received, points, rank of each team
 		// res.send array of objects
 
-		// !! dummy data for testing !!
+		(async function() {
+			let q = await conn.query(
+				`
+				SELECT * FROM Team
+				`
+			)
 
-		let dummy = [
-			new Team(0, 'Team XXX', [], 0, 0, 0, 0),
-			new Team(1, 'Team YYY', [], 0, 0, 0, 0),
-			new Team(2, 'Team ZZZ', [], 0, 0, 0, 0)
-		]
+			console.log(q)
+			let teams = []
+			q.forEach(team => {
+				teams.push(
+					new Team(team.teamID, team.name, [])
+				)
+			})
+			console.log(teams);
+			res.status(200).send(teams)
+			
+		})()
+
+
+
+		// let dummy = [
+		// 	new Team(0, 'Team XXX', [], 0, 0, 0, 0),
+		// 	new Team(1, 'Team YYY', [], 0, 0, 0, 0),
+		// 	new Team(2, 'Team ZZZ', [], 0, 0, 0, 0)
+		// ]
 
 		console.log(`sedning teams array`)
-		res.send(dummy)
+		// res.send(dummy)
 
 	})
 
 	app.post('/teams', (req, res) => {
-		// i dont`t know why i named this endpoint <teams>
+		// i dont`t know why i named this endpoint <teams>, it`s for goals
 		// but i`m keeping it :\
 
 		let q = req.query
@@ -89,7 +108,27 @@ module.exports = (app, conn) => {
 				console.log(err);
 			})
 
+		
+		
+		
+		
+		
+			let count = await conn.query(
+				`
+				select count(playerID) as total
+				from goals
+				where playerID = ${q.player} and matchID=${q.match};
+				`
+			)
+
+			console.log('coooouuunnttttt:');
+			console.log(count);
+			
+			
 		})()
+
+
+
 		
 
 		res.status(200).send()
@@ -135,25 +174,26 @@ module.exports = (app, conn) => {
 				
 				let t1 = await conn.query(
 					`
-					SELECT P.playerid, A.fname, A.lname
+					SELECT P.playerid, A.fname, A.lname, P.goalstotal AS goals
 					FROM PlayerTeams as PT
 					Join Players P on PT.playerid = P.playerid
 					JOIN Actor A ON P.kfupmid = A.kfupmID
 					WHERE PT.teamid = ${match.team1ID};
 					`
-					)
-					
+				)
+
+				
 				let arr1 = []
 				t1.forEach(player => {
 				arr1.push(
-					new Player(player.playerid, player.fname, 0)
+					new Player(player.playerid, player.fname, player.goals)
 					)
 				});
 				
 				players1.push(arr1)
 				let t2 = await conn.query(
 					`
-					SELECT P.playerid, A.fname, A.lname
+					SELECT P.playerid, A.fname, A.lname, P.goalstotal AS goals
 					FROM PlayerTeams as PT
 					Join Players P on PT.playerid = P.playerid
 					JOIN Actor A ON P.kfupmid = A.kfupmID
@@ -164,11 +204,17 @@ module.exports = (app, conn) => {
 				let arr2 = []
 				t2.forEach(player => {
 					arr2.push(
-						new Player(player.playerid, player.fname, 0)
+						new Player(player.playerid, player.fname, player.goals)
 					)
 				});
 				
 				players2.push(arr2)
+
+
+
+
+
+
 
 
 
@@ -187,8 +233,107 @@ module.exports = (app, conn) => {
 				refs.push(ref[0].fname)
 
 
+
+
+
+
+
+
+				// let count = await conn.query(
+				// 	`
+				// 	select count(playerID) as total
+				// 	from goals
+				// 	where playerID = ${q.player} and matchID=${q.match};
+				// 	`
+				// )
+	
+				// console.log('coooouuunnttttt:');
+				// console.log(count);
+				
+				
+				// conn.query(
+				// 	`
+				// 	update players set goalsTotal = ${count[0].total}
+				// 	where playerID = ${q.player}
+				// 	`
+				// )
+				// .then(res => {
+				// 	console.log('total goasl update, res: ');
+				// 	console.log(res);
+					
+					
+				// })
+				// .catch(err => {
+				// 	console.log('total goasl update err, err: ');
+				// 	console.log(err);
+				// })
+
 			}
 			
+
+
+
+
+
+
+			console.log('******************************************')
+			let count;
+			let count1 = []
+			for (let i = 0; i < players1.length; i++) {
+				let carr = []
+
+				for (let j = 0; j < players1[i].length; j++) {
+
+					count = await conn.query(
+						`
+						select count(playerID) as total
+						from goals
+						where playerID = ${players1[i][j].id} and matchID=${i+1};
+						`
+					)
+					carr.push(count[0].total)
+				}
+				
+				count1.push(carr)
+				
+			}
+			console.log(count1);
+			
+			console.log('******************************************')
+
+			console.log('******************************************')
+			let count2 = []
+			for (let i = 0; i < players2.length; i++) {
+				let carr = []
+
+				for (let j = 0; j < players2[i].length; j++) {
+
+					count = await conn.query(
+						`
+						select count(playerID) as total
+						from goals
+						where playerID = ${players2[i][j].id} and matchID=${i+1};
+						`
+					)
+					carr.push(count[0].total)
+				}
+				
+				count2.push(carr)
+				
+			}
+			console.log(count2);
+			
+			console.log('******************************************')
+
+
+
+
+			
+			
+
+
+
+
 			console.log(refs);
 			
 
@@ -206,6 +351,17 @@ module.exports = (app, conn) => {
 			let arr = []
 
 			for (let i = 0; i < qres.length; i++) {
+				
+
+				for (let j = 0; j < players1.length; j++) {
+					players1[i][j].goals = count1[i][j]
+				}
+
+				for (let j = 0; j < players2.length; j++) {
+					players2[i][j].goals = count2[i][j]
+				}
+
+
 				arr.push(
 					new Match(
 						qres[i].id, (qres[i].date + '').substr(0, 15),
