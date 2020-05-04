@@ -34,8 +34,9 @@ module.exports = (app, conn) => {
 		// i dont`t know why i named this endpoint <teams>
 		// but i`m keeping it :\
 
+		let q = req.query
 		console.log(q);
-
+		
 		conn.query(
 			`
 			INSERT INTO Goals VALUES
@@ -56,7 +57,6 @@ module.exports = (app, conn) => {
 			console.log(err)
 		})
 		
-		console.log(`new goal from: ${q.player}, in ${q.match}, at ${q.time}`);
 		res.status(200).send()
 		
 	})
@@ -74,6 +74,8 @@ module.exports = (app, conn) => {
 			SELECT 
 			M.matchID AS id,
 			M.datet AS date,
+			M.team1Goals AS goals1,
+			M.team2Goals AS goals2,
 			M.refreeid AS referee,
 			F.name AS field,
 			T1.name AS team1,
@@ -174,7 +176,7 @@ module.exports = (app, conn) => {
 						qres[i].id, (qres[i].date + '').substr(0, 15),
 						new Team(qres[i].team1ID, qres[i].team1, players1[i]),
 						new Team(qres[i].team2ID, qres[i].team2, players2[i]),
-						qres[i].field, refs[i]
+						qres[i].field, refs[i], qres[i].goals1, qres[i].goals2
 					)
 				)
 			}
@@ -417,14 +419,13 @@ class Team {
 
 class Match {
   constructor(
-    id, date, team1, team2, field, ref, goals=0, score1=0, score2=0
+    id, date, team1, team2, field, ref, score1=0, score2=0
   ) {
       this.id = id
       this.date = date
       this.team1 = team1
       this.team2 = team2
       this.field = field
-      this.goals = goals
       this.score1 = score1
 			this.score2 = score2,
 			this.ref = ref

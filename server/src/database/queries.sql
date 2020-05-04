@@ -20,6 +20,8 @@ WHERE kfupmID in (
 SELECT 
 M.matchID AS id,
 M.datet AS date,
+M.team1Goals AS goals1,
+M.team2Goals AS goals2,
 M.refreeid AS referee,
 F.name AS field,
 T1.name AS team1,
